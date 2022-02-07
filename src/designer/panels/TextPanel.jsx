@@ -1,153 +1,131 @@
-import React, { Component } from 'react'
 import _ from 'lodash'
-
-import Icon from '../Icon'
-
-import styles from './styles'
-import PropertyGroup from './PropertyGroup'
-import Button from './Button'
-import SwitchState from './SwitchState'
-import Columns from './Columns'
-import Column from './Column'
 import WebFont from 'webfontloader'
+import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  Italic,
+  Underline,
+} from 'iconoir-react'
+import PropertyGroup from './PropertyGroup'
+import { GridContainer } from './GridContainer'
+import { RowFlex } from './RowFlex'
+import { NameItem } from './NameItem'
+import { Switch } from './Switch'
+import { RadioGroup } from './RadioGroup'
+import { RadioInput } from './RadioInput'
+import { fontFamilies } from '../utils/fontFamilies'
+import styles from './styles'
 
-export class TextPanel extends Component {
-  fontFamilies = [
-    { name: 'Alegreya Sans', family: 'Alegreya Sans' },
-    { name: 'Alegreya', family: 'Alegreya' },
-    {
-      name: 'American Typewriter',
-      family: 'AmericanTypewriter, Georgia, serif',
-    },
-    { name: 'Anonymous Pro', family: 'Anonymous Pro' },
-    { name: 'Archivo Narrow', family: 'Archivo Narrow' },
-    { name: 'Arvo', family: 'Arvo' },
-    { name: 'Bitter', family: 'Bitter' },
-    { name: 'Cardo', family: 'Cardo' },
-    { name: 'Chivo', family: 'Chivo' },
-    { name: 'Crimson Text', family: 'Crimson Text' },
-    { name: 'Domine', family: 'Domine' },
-    { name: 'Fira Sans', family: 'Fira Sans' },
-    { name: 'Georgia', family: 'Georgia, serif' },
-    { name: 'Helvetica Neue', family: '"Helvetica Neue", Arial, sans-serif' },
-    { name: 'Helvetica', family: 'Helvetica, Arial, sans-serif' },
-    { name: 'Inconsolata', family: 'Inconsolata' },
-    { name: 'Karla', family: 'Karla' },
-    { name: 'Lato', family: 'Lato' },
-    { name: 'Libre Baskerville', family: 'Libre Baskerville' },
-    { name: 'Lora', family: 'Lora' },
-    { name: 'Merriweather', family: 'Merriweather' },
-    { name: 'Monaco', family: 'Monaco, consolas, monospace' },
-    { name: 'Montserrat', family: 'Montserrat' },
-    { name: 'Neuton', family: 'Neuton' },
-    { name: 'Old Standard TT', family: 'Old Standard TT' },
-    { name: 'Open Sans', family: 'Open Sans' },
-    { name: 'PT Serif', family: 'PT Serif' },
-    { name: 'Playfair Display', family: 'Playfair Display' },
-    { name: 'Poppins', family: 'Poppins' },
-    { name: 'Roboto Slab', family: 'Roboto Slab' },
-    { name: 'Roboto', family: 'Roboto' },
-    { name: 'Source Pro', family: 'Source Pro' },
-    { name: 'Source Sans Pro', family: 'Source Sans Pro' },
-    { name: 'Varela Round', family: 'Varela Round' },
-    { name: 'Work Sans', family: 'Work Sans' },
-  ]
+export const TextPanel = ({ onChange, object }) => {
+  const hasProperty = (property) => Object.hasOwn(object, property)
 
-  handleFontFamilyChange = (e) => {
+  const handleFontFamilyChange = (e) => {
     const value = e.target.value
     WebFont.load({
       google: {
         families: [value],
       },
     })
-    this.props.onChange('fontFamily', value)
+    onChange('fontFamily', value)
   }
 
-  sortFonts = (f1, f2) =>
+  const handleTextAnchor = (value) => {
+    onChange('textAnchor', value)
+  }
+
+  const sortFonts = (f1, f2) =>
     f1.name.toLowerCase() > f2.name.toLowerCase()
       ? 1
       : f1.name.toLowerCase() < f2.name.toLowerCase()
       ? -1
       : 0
 
-  render() {
-    let { object } = this.props
-    return (
-      <PropertyGroup showIf={_.has(object, 'text')}>
-        <div style={styles.columns}>
-          <Column style={{ float: 'right', marginRight: 15 }}>
-            {_.has(object, 'fontWeight') && (
-              <SwitchState
-                icon="format-bold"
-                defaultValue={'normal'}
-                nextState={'bold'}
-                value={object.fontWeight}
-                onChange={this.props.onChange.bind(this, 'fontWeight')}
-              />
-            )}
-            {_.has(object, 'fontStyle') && (
-              <SwitchState
-                icon="format-italic"
-                defaultValue={'normal'}
-                nextState={'italic'}
-                value={object.fontStyle}
-                onChange={this.props.onChange.bind(this, 'fontStyle')}
-              />
-            )}
-            {_.has(object, 'textDecoration') && (
-              <SwitchState
-                icon="format-underline"
-                defaultValue={'none'}
-                nextState={'underline'}
-                value={object.textDecoration}
-                onChange={this.props.onChange.bind(this, 'textDecoration')}
-              />
-            )}
-          </Column>
-          <Column style={{ float: 'right' }}>
-            {_.has(object, 'fontSize') && (
-              <input
-                style={{ ...styles.input, ...styles.integerInput, width: 35 }}
-                value={object.fontSize}
-                onChange={(e) =>
-                  this.props.onChange('fontSize', e.target.value)
-                }
-              />
-            )}
-          </Column>
-          <Column style={{ float: 'left', marginRight: 10 }}>
-            <select
-              style={styles.select}
-              value={object.fontFamily}
-              onChange={this.handleFontFamilyChange}
+  return (
+    <PropertyGroup showIf={_.has(object, 'text')}>
+      <GridContainer>
+        <NameItem>Text:</NameItem>
+        <RowFlex>
+          <input
+            style={{ ...styles.input, ...styles.textInput }}
+            onChange={(e) => onChange('text', e.target.value)}
+            value={object.text}
+          />
+        </RowFlex>
+        <NameItem>Label:</NameItem>
+        <RowFlex>
+          <input
+            style={{ ...styles.input, ...styles.textInput }}
+            onChange={(e) => onChange('label', e.target.value)}
+            value={object.label}
+          />
+        </RowFlex>
+        <RowFlex>
+          <NameItem>Text style:</NameItem>
+          {hasProperty('fontWeight') && (
+            <Switch
+              label="fontWeight"
+              icon={<Bold />}
+              defaultValue="normal"
+              nextValue="bold"
+              onChange={(value) => onChange('fontWeight', value)}
+            />
+          )}
+          {hasProperty('fontStyle') && (
+            <Switch
+              label="fontStyle"
+              icon={<Italic />}
+              defaultValue="normal"
+              nextValue="italic"
+              onChange={(value) => onChange('fontStyle', value)}
+            />
+          )}
+          {hasProperty('textDecoration') && (
+            <Switch
+              icon={<Underline />}
+              defaultValue="none"
+              nextValue="underline"
+              onChange={(value) => onChange('textDecoration', value)}
+            />
+          )}
+        </RowFlex>
+        {hasProperty('textAnchor') && (
+          <RowFlex>
+            <NameItem>Align text:</NameItem>
+            <RadioGroup
+              name="textAnchor"
+              defaultValue={object.textAnchor}
+              onChange={({ value }) => handleTextAnchor(value)}
             >
-              {this.fontFamilies
-                .sort(this.sortFonts)
-                .map(({ name, family }) => (
-                  <option key={family} value={family}>
-                    {name}
-                  </option>
-                ))}
-            </select>
-          </Column>
-          <span>Content:</span>
-          <div style={{ ...styles.row, paddingTop: 10, paddingRight: 10 }}>
+              <RadioInput value="start" icon={<AlignLeft />} />
+              <RadioInput value="middle" icon={<AlignCenter />} />
+              <RadioInput value="end" icon={<AlignRight />} />
+            </RadioGroup>
+          </RowFlex>
+        )}
+
+        {hasProperty('fontSize') && (
+          <RowFlex>
+            <NameItem>Font size:</NameItem>
             <input
-              style={{ ...styles.input, ...styles.textInput }}
-              onChange={(e) => this.props.onChange('text', e.target.value)}
-              value={object.text}
+              style={{ ...styles.input, ...styles.integerInput, width: 35 }}
+              value={object.fontSize}
+              onChange={(e) => onChange('fontSize', e.target.value)}
             />
-          </div>
-          <span>Label:</span>
-          <div style={{ ...styles.row, paddingTop: 10, paddingRight: 10 }}>
-            <input
-              style={{ ...styles.input, ...styles.textInput }}
-              onChange={(e) => this.props.onChange('label', e.target.value)}
-              value={object.label}
-            />
-          </div>
-        </div>
-      </PropertyGroup>
-    )
-  }
+          </RowFlex>
+        )}
+        <RowFlex>
+          <NameItem>Font family:</NameItem>
+          <select value={object.fontFamily} onChange={handleFontFamilyChange}>
+            {fontFamilies.sort(sortFonts).map(({ name, family }) => (
+              <option key={family} value={family}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </RowFlex>
+      </GridContainer>
+    </PropertyGroup>
+  )
 }
