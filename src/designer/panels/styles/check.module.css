@@ -1,0 +1,19 @@
+.container {
+  color: #868585;
+  display: flex;
+  align-items: center;
+}
+
+.check {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.description {
+  margin-left: 3px;
+}
+
+.check:checked + svg {
+  color: #000;
+}
