@@ -15,6 +15,7 @@ export class Text extends Vector {
       fontWeight: 'normal',
       fontStyle: 'normal',
       textDecoration: 'none',
+      textAnchor: 'middle',
       fill: 'black',
       fontSize: 20,
       fontFamily: 'Open Sans',
@@ -52,7 +53,7 @@ export class Text extends Vector {
       <text
         style={this.getStyle()}
         {...restOfAttributes}
-        textAnchor="middle"
+        textAnchor={object.textAnchor}
         fontSize={object.fontSize}
         fontFamily={object.fontFamily}
         // width={object.width}
