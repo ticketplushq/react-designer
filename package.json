@@ -29,5 +29,15 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
     "vite": "^2.7.2"
-  }
+  },
+  "keywords": [
+    "React.js",
+    "react-designer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andres-mestra/react-designer.git"
+  },
+  "author": "andresmestradev",
+  "license": "MIT"
 }
