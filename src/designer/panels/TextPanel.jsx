@@ -8,6 +8,7 @@ import {
   Italic,
   Underline,
 } from 'iconoir-react'
+import { useHasProperty } from '../hooks/useHasProperty'
 import PropertyGroup from './PropertyGroup'
 import { GridContainer } from './GridContainer'
 import { RowFlex } from './RowFlex'
@@ -19,7 +20,7 @@ import { fontFamilies } from '../utils/fontFamilies'
 import styles from './styles'
 
 export const TextPanel = ({ onChange, object }) => {
-  const hasProperty = (property) => Object.hasOwn(object, property)
+  const [hasProperty] = useHasProperty(object)
 
   const handleFontFamilyChange = (e) => {
     const value = e.target.value
