@@ -1,10 +1,17 @@
 {
-  "name": "react-designer",
-  "version": "0.0.0",
+  "name": "react-designer-2",
+  "version": "1.2.1",
+  "description": "Design Editor Tools with React.js",
+  "main": "lib/react-designer.cjs.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:lib": "vite --config vite.config.lib.js  build ",
+    "preview": "vite preview",
+    "deploy": "yarn build:lib && yarn publish"
   },
   "dependencies": {
     "classnames": "^2.3.1",
