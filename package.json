@@ -2,16 +2,21 @@
   "name": "react-designer-2",
   "version": "1.2.2",
   "description": "Design Editor Tools with React.js",
-  "main": "lib/react-designer.cjs.js",
+  "main": "lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:lib": "vite --config vite.config.lib.js  build ",
+    "build:lib": "webpack",
     "preview": "vite preview",
     "deploy": "yarn build:lib && yarn publish"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "dependencies": {
     "classnames": "^2.3.1",
@@ -27,8 +32,18 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
     "@vitejs/plugin-react": "^1.0.7",
-    "vite": "^2.7.2"
+    "babel-loader": "^8.2.4",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.1",
+    "vite": "^2.8.6",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0"
   },
   "keywords": [
     "React.js",
