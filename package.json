@@ -53,6 +53,9 @@
     "type": "git",
     "url": "git+https://github.com/ticketplushq/react-designer.git"
   },
+  "publishConfig": {
+    "@ticketplushq:registry": "https://npm.pkg.github.com"
+  },
   "author": "Fatih Erikli <fatiherikli@gmail.com> (http://fatiherikli.com)",
   "license": "MIT"
 }
