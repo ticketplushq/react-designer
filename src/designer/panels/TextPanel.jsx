@@ -110,7 +110,9 @@ export const TextPanel = ({ onChange, object }) => {
           <RowFlex>
             <NameItem>Font size:</NameItem>
             <input
-              style={{ ...styles.input, ...styles.integerInput, width: 35 }}
+              min={1}
+              type="number"
+              style={{ ...styles.input, ...styles.integerInput, width: 50 }}
               value={object.fontSize}
               onChange={(e) => onChange('fontSize', e.target.value)}
             />
