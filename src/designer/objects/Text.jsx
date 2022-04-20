@@ -19,8 +19,7 @@ export class Text extends Vector {
       fill: 'black',
       fontSize: 20,
       fontFamily: 'Open Sans',
-      // width: 50,
-      // height: 25,
+      active: true,
     },
   }
 
@@ -56,8 +55,6 @@ export class Text extends Vector {
         textAnchor={object.textAnchor}
         fontSize={object.fontSize}
         fontFamily={object.fontFamily}
-        // width={object.width}
-        // height={object.height}
       >
         {object.text}
       </text>

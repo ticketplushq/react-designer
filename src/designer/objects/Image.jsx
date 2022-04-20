@@ -9,6 +9,7 @@ export class Image extends Vector {
   static meta = {
     icon: <Icon icon={'image'} size={30} />,
     initial: {
+      active: true,
       label: 'newImage',
       width: 100,
       height: 100,

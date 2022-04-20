@@ -46,6 +46,16 @@ export const TextPanel = ({ onChange, object }) => {
   return (
     <PropertyGroup showIf={_.has(object, 'text')}>
       <GridContainer>
+        {hasProperty('active') && (
+          <RowFlex>
+            <NameItem>Active:</NameItem>
+            <Switch
+              label="active"
+              defaultChecked={object?.active}
+              onChange={(_, checked) => onChange('active', checked)}
+            />
+          </RowFlex>
+        )}
         <NameItem>Text:</NameItem>
         <RowFlex>
           <input

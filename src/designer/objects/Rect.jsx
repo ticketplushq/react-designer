@@ -16,6 +16,8 @@ export class Rect extends Vector {
       radius: 0,
       blendMode: 'normal',
       rotate: 0,
+      active: true,
+      label: 'defult text',
     },
   }
 

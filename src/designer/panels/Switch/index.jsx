@@ -1,21 +1,29 @@
 import style from '../styles/check.module.css'
 
-export const Switch = ({ label, icon, defaultValue, nextValue, onChange }) => {
+export const Switch = ({
+  label,
+  icon,
+  defaultValue,
+  nextValue,
+  onChange,
+  defaultChecked,
+}) => {
   const handleCheck = (event) => {
     const { checked } = event.target
     const newState = checked ? nextValue : defaultValue
-    onChange(newState)
+    onChange(newState, checked)
   }
 
   return (
     <label htmlFor={label} className={style.container}>
       <input
-        className={style.check}
+        className={icon ? style.check : ''}
         id={label}
         type="checkbox"
         onChange={handleCheck}
+        defaultChecked={defaultChecked}
       />
-      {icon}
+      {icon && icon}
     </label>
   )
 }

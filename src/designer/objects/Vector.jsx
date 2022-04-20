@@ -31,8 +31,9 @@ export class Vector extends Component {
 
   getObjectAttributes() {
     let { object, onRender, ...rest } = this.props
+    const { active, label, ...restObject } = object
     return {
-      ...object,
+      ...restObject,
       transform: this.getTransformMatrix(object),
       ref: onRender,
       ...rest,
