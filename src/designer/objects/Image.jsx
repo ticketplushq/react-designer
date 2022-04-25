@@ -9,8 +9,8 @@ export class Image extends Vector {
   static meta = {
     icon: <Icon icon={'image'} size={30} />,
     initial: {
+      label: 'default_label',
       active: true,
-      label: 'newImage',
       width: 100,
       height: 100,
       // Just a simple base64-encoded outline

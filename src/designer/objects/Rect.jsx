@@ -17,7 +17,7 @@ export class Rect extends Vector {
       blendMode: 'normal',
       rotate: 0,
       active: true,
-      label: 'defult text',
+      label: 'default_label',
     },
   }
 

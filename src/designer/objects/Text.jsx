@@ -9,7 +9,7 @@ export class Text extends Vector {
   static meta = {
     icon: <Icon icon={'text'} size={30} />,
     initial: {
-      label: 'defult text',
+      label: 'default_label',
       text: 'Type some text...',
       rotate: 0,
       fontWeight: 'normal',
