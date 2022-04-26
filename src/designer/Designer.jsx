@@ -51,7 +51,7 @@ class Designer extends Component {
     closePath: ['enter'],
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.objectRefs = {}
   }
 
@@ -297,29 +297,34 @@ class Designer extends Component {
       keys = Object.keys(refs),
       offset = this.getOffset()
 
-    let currentRect = refs[currentObjectIndex].getBoundingClientRect()
+    let currentRect = refs[currentObjectIndex]?.getBoundingClientRect()
+    if (currentRect) {
+      keys
+        .filter((object, index) => index !== currentObjectIndex)
+        .forEach((key) => {
+          let rect = refs[key]?.getBoundingClientRect()
+          if (rect) {
+            let { left, top, width, height } = rect
 
-    keys
-      .filter((object, index) => index !== currentObjectIndex)
-      .forEach((key) => {
-        let rect = refs[key].getBoundingClientRect()
-        let { left, top, width, height } = rect
+            left -= offset.x
+            top -= offset.y
 
-        left -= offset.x
-        top -= offset.y
+            let isOverlapped =
+              mouse.x > left &&
+              mouse.x < left + width &&
+              mouse.y > top &&
+              mouse.y < top + height &&
+              currentRect.width > width &&
+              currentRect.height > height
 
-        let isOverlapped =
-          mouse.x > left &&
-          mouse.x < left + width &&
-          mouse.y > top &&
-          mouse.y < top + height &&
-          currentRect.width > width &&
-          currentRect.height > height
-
-        if (isOverlapped) {
-          this.showHandler(Number(key))
-        }
-      })
+            if (isOverlapped) {
+              this.showHandler(Number(key))
+            }
+          } else {
+            this.removeCurrent()
+          }
+        })
+    }
   }
 
   stopDrag() {
@@ -398,7 +403,6 @@ class Designer extends Component {
 
   handleObjectChange(key, value) {
     let { selectedObjectIndex } = this.state
-    // console.log(this.state, key, value)
     this.updateObject(selectedObjectIndex, {
       [key]: value,
     })
@@ -569,7 +573,7 @@ class Designer extends Component {
           </div>
 
           {/* Right Panel: Displays text, styling and sizing tools */}
-          {showPropertyPanel && (
+          {showPropertyPanel && currentObject && (
             <PanelList
               id={this.props.id}
               object={objectWithInitial}
