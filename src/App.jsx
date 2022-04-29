@@ -9,14 +9,13 @@ function App() {
     setState((state) => {
       const newState = [...state]
       const element = newState[index]
-      handleRemove(element.uuid)
       newState[index] = { ...element, active: checked }
       return newState
     })
   }
 
-  const handleUpdate = (updateState) => {
-    if (state.length === 0) {
+  const handleUpdate = (updateState, action) => {
+    if (state.length === 0 || action?.remove) {
       setState([...updateState])
       return
     }

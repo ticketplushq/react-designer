@@ -172,21 +172,26 @@ class Designer extends Component {
 
   updateObject(objectIndex, changes, updatePath) {
     let { objects, onUpdate } = this.props
-    onUpdate(
-      objects.map((object, index) => {
-        if (index === objectIndex) {
-          let newObject = {
-            ...object,
-            ...changes,
-          }
-
-          return updatePath ? this.updatePath(newObject) : newObject
-        } else {
-          // console.log("ID=> ", object.uuid, "CHANGES :", JSON.stringify(changes))
-          return object
+    const newObjects = objects.map((object, index) => {
+      if (index === objectIndex) {
+        let newObject = {
+          ...object,
+          ...changes,
         }
-      })
-    )
+
+        return updatePath ? this.updatePath(newObject) : newObject
+      } else {
+        // console.log("ID=> ", object.uuid, "CHANGES :", JSON.stringify(changes))
+        return object
+      }
+    })
+
+    if (changes?.active === false) {
+      this.unselectCurrent(newObjects)
+      return
+    }
+
+    onUpdate(newObjects)
   }
 
   getOffset() {
@@ -211,7 +216,7 @@ class Designer extends Component {
 
   updateHandler(index, object) {
     let target = this.objectRefs[index]
-    let bbox = target.getBoundingClientRect()
+    let bbox = target?.getBoundingClientRect()
     let { canvasOffsetX, canvasOffsetY } = this.getCanvas()
 
     let handler = {
@@ -303,6 +308,7 @@ class Designer extends Component {
         .filter((object, index) => index !== currentObjectIndex)
         .forEach((key) => {
           let rect = refs[key]?.getBoundingClientRect()
+
           if (rect) {
             let { left, top, width, height } = rect
 
@@ -321,7 +327,7 @@ class Designer extends Component {
               this.showHandler(Number(key))
             }
           } else {
-            this.removeCurrent()
+            this.unselectCurrent(objects)
           }
         })
     }
@@ -439,7 +445,7 @@ class Designer extends Component {
     let { selectedObjectIndex } = this.state
     let { objects } = this.props
 
-    let rest = objects.filter((object, index) => selectedObjectIndex !== index)
+    let rest = objects.filter((object, index) => index !== selectedObjectIndex)
 
     this.setState(
       {
@@ -450,7 +456,22 @@ class Designer extends Component {
       },
       () => {
         this.objectRefs = {}
-        this.props.onUpdate(rest)
+        this.props.onUpdate(rest, { remove: true })
+      }
+    )
+  }
+
+  unselectCurrent(objects) {
+    this.setState(
+      {
+        currentObjectIndex: null,
+        selectedObjectIndex: null,
+        showHandler: false,
+        handler: null,
+      },
+      () => {
+        this.objectRefs = {}
+        this.props.onUpdate(objects)
       }
     )
   }
