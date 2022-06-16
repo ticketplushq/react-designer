@@ -128,6 +128,28 @@ export const TextPanel = ({ onChange, object }) => {
             />
           </RowFlex>
         )}
+        {hasProperty('isExpand') && (
+          <RowFlex>
+            <NameItem>Expand length:</NameItem>
+            <Switch
+              label="isExpand"
+              defaultChecked={object?.isExpand}
+              onChange={(_, checked) => onChange('isExpand', checked)}
+            />
+          </RowFlex>
+        )}
+        {hasProperty('maxLength') && !object?.isExpand && (
+          <RowFlex>
+            <NameItem>Max length:</NameItem>
+            <input
+              min={2}
+              type="number"
+              style={{ ...styles.input, ...styles.integerInput, width: 50 }}
+              value={object.maxLength}
+              onChange={(e) => onChange('maxLength', e.target.value)}
+            />
+          </RowFlex>
+        )}
         <RowFlex>
           <NameItem>Font family:</NameItem>
           <select value={object.fontFamily} onChange={handleFontFamilyChange}>

@@ -20,7 +20,7 @@ function joinLineAndSilabas(lastLine, silabas, maxLength) {
   for (const s of silabas) {
     const isNewWord = lastReadSilaba === 0 && newLine.length
     const l = isNewWord ? `${newLine} ${s.silaba}` : `${newLine}${s.silaba}`
-    if (l.length < maxLength) {
+    if (l?.length < maxLength) {
       add = true
       newLine = l
       lastReadSilaba++
