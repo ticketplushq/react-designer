@@ -83,14 +83,21 @@ function LineBreak({ object, maxLength }) {
         .filter((w) => w.length)
     : [object?.text.trim()]
   const lines = lineBreak(words, maxLength)
+  const hasMany = lines?.length > 1
+  const firstLine = lines[0]
 
   return (
     <>
-      {lines.map((t) => (
-        <tspan key={t} x={object?.x} dy="1.03em">
-          {t}
-        </tspan>
-      ))}
+      <tspan x={object?.x} dy="0em">
+        {firstLine}
+      </tspan>
+
+      {hasMany &&
+        lines.slice(1, lines.length).map((t, index) => (
+          <tspan key={t} x={object?.x} dy="1.03em">
+            {t}
+          </tspan>
+        ))}
     </>
   )
 }
