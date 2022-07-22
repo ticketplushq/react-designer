@@ -365,14 +365,19 @@ class Designer extends Component {
 
   getCanvas() {
     let { width, height } = this.props
+
     let { canvasWidth = width, canvasHeight = height } = this.props
+
     return {
       width,
       height,
       canvasWidth,
       canvasHeight,
-      canvasOffsetX: (canvasWidth - width) / 2,
-      canvasOffsetY: (canvasHeight - height) / 2,
+      canvasOffsetX: 0,
+      canvasOffsetY: 0,
+      //TODO: handle in the future to responsive
+      //canvasOffsetX: (canvasWidth - width) / 2,
+      //canvasOffsetY: (canvasHeight - height) / 2,
     }
   }
 
