@@ -423,7 +423,6 @@ class Designer extends Component {
     let { selectedObjectIndex } = this.state
     let { objects } = this.props
     let object = objects[selectedObjectIndex]
-
     let arrangers = {
       front: (rest, object) => [[...rest, object], rest.length],
       back: (rest, object) => [[object, ...rest], 0],
@@ -438,7 +437,7 @@ class Designer extends Component {
       () => {
         let arranger = arrangers[arrange]
         let [arranged, newIndex] = arranger(rest, object)
-        this.props.onUpdate(arranged)
+        this.props.onUpdate(arranged, { arrange: true })
         this.setState({
           selectedObjectIndex: newIndex,
         })

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Designer, Rect, Text } from './designer'
+import { Designer, Rect, Text, Image } from './designer'
 import './App.css'
 
 function App() {
@@ -15,10 +15,10 @@ function App() {
   }
 
   const handleUpdate = (updateState, action) => {
-    if (state.length === 0 || action?.remove) {
-      setState([...updateState])
-      return
-    }
+    const isEmpetyState = state?.length === 0
+
+    if (isEmpetyState || action?.remove || action?.arrange)
+      return setState([...updateState])
 
     const newState = [...state]
     updateState.forEach((element) => {
@@ -43,6 +43,7 @@ function App() {
           objectTypes={{
             text: Text,
             rect: Rect,
+            image: Image,
           }}
           onUpdate={handleUpdate}
           objects={actives}
