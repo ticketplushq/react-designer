@@ -17,7 +17,7 @@ export class Vector extends Component {
   getStyle() {
     let { object } = this.props
     return {
-      mixBlendMode: object.blendMode,
+      mixBlendMode: object.blendmode,
     }
   }
 

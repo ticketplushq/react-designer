@@ -71,8 +71,8 @@ export class StylePanel extends Component {
           <Column>
             <select
               style={styles.select}
-              value={object.blendMode}
-              onChange={(e) => this.props.onChange('blendMode', e.target.value)}
+              value={object.blendmode}
+              onChange={(e) => this.props.onChange('blendmode', e.target.value)}
             >
               {this.modes.map((mode) => (
                 <option key={mode} value={mode}>

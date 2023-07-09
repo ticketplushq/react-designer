@@ -9,8 +9,8 @@ class BezierEditor extends Component {
   getMouseCoords(event) {
     let {object, offset} = this.props;
     return {
-      x: event.clientX - offset.x - (object.x - object.moveX),
-      y: event.clientY - offset.y - (object.y - object.moveY)
+      x: event.clientX - offset.x - (object.x - object.movex),
+      y: event.clientY - offset.y - (object.y - object.movey)
     };
   }
 
@@ -21,8 +21,8 @@ class BezierEditor extends Component {
         path: [
           {x1: object.x, y1: object.y}
         ],
-        moveX: object.x,
-        moveY: object.y
+        movex: object.x,
+        movey: object.y
       });
     } else {
       this.setState({
@@ -73,16 +73,16 @@ class BezierEditor extends Component {
     let currentPath = this.getCurrentPath();
     let mouse = this.getMouseCoords(event);
     let {object} = this.props;
-    let {moveX, moveY} = object;
+    let {movex, movey} = object;
     let {x, y} = mouse;
 
     let snapToInitialVertex = (
-      this.isCollides(moveX, moveY, x, y)
+      this.isCollides(movex, movey, x, y)
     );
 
     if (snapToInitialVertex) {
-      x = moveX;
-      y = moveY;
+      x = movex;
+      y = movey;
     }
 
     if (mode === 'source') {
@@ -123,8 +123,8 @@ class BezierEditor extends Component {
 
     if (mode === 'moveInitial') {
       this.props.onUpdate({
-        moveX: x,
-        moveY: y
+        movex: x,
+        movey: y
       });
     }
   }
@@ -201,7 +201,7 @@ class BezierEditor extends Component {
     let {state} = this;
     let {object} = this.props;
     if (pathIndex === 0) {
-      return {x: object.moveX, y: object.moveY}
+      return {x: object.movex, y: object.movey}
     } else {
       let path = state.path[pathIndex - 1];
       return {x: path.x, y: path.y};
@@ -216,8 +216,8 @@ class BezierEditor extends Component {
     this.props.onClose();
 
     this.updateCurrentPath({
-      x: this.props.object.moveX,
-      y: this.props.object.moveY
+      x: this.props.object.movex,
+      y: this.props.object.movey
     }, true);
   }
 
@@ -249,10 +249,10 @@ class BezierEditor extends Component {
     let {path} = object;
     let {state} = this;
 
-    let {moveX, moveY, x, y} = object;
+    let {movex, movey, x, y} = object;
 
-    let offsetX = x - moveX,
-        offsetY = y - moveY;
+    let offsetX = x - movex,
+        offsetY = y - movey;
 
     return (
       <div style={styles.canvas}
@@ -282,7 +282,7 @@ class BezierEditor extends Component {
                 )}
                 {i === 0 && (
                   <g>
-                    <line x1={moveX} y1={moveY}
+                    <line x1={movex} y1={movey}
                       style={styles.edge}
                       onMouseDown={this.moveVertex.bind(this, i, 'x1', 'y1')}
                       x2={x1} y2={y1} stroke="black" />
@@ -290,7 +290,7 @@ class BezierEditor extends Component {
                     <circle style={styles.vertex} r={4} cx={x1} cy={y1}
                       onMouseDown={this.moveVertex.bind(this, i, 'x1', 'y1')} />
 
-                    <circle r={4} cx={moveX} cy={moveY}
+                    <circle r={4} cx={movex} cy={movey}
                       style={{...styles.vertex, ...styles.initialVertex}} />
                   </g>
                 )}

@@ -9,12 +9,14 @@ export class Circle extends Vector {
   static meta = {
     icon: <Icon icon={'circle'} size={30} />,
     initial: {
-      width: 5,
-      height: 5,
+      width: 10,
+      height: 10,
       rotate: 0,
       fill: 'yellow',
       strokeWidth: 0,
-      blendMode: 'normal',
+      blendmode: 'normal',
+      active: true,
+      label: 'default_label',
     },
   }
 

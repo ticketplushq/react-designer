@@ -34,7 +34,7 @@ export class Text extends Vector {
       fontWeight: object.fontWeight,
       fontStyle: object.fontStyle,
       textDecoration: object.textDecoration,
-      mixBlendMode: object.blendMode,
+      mixBlendMode: object.blendmode,
       WebkitUserSelect: 'none',
     }
   }

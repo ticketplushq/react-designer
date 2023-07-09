@@ -12,11 +12,13 @@ export class Path extends Vector {
       fill: '#e3e3e3',
       closed: false,
       rotate: 0,
-      moveX: 0,
-      moveY: 0,
+      movex: 0,
+      movey: 0,
       path: [],
       stroke: 'gray',
       strokeWidth: 1,
+      active: true,
+      label: 'default_label',
     },
     mode: modes.DRAW_PATH,
     icon: <Icon icon={'polygon'} size={30} />,
@@ -30,7 +32,7 @@ export class Path extends Vector {
       ({ x1, y1, x2, y2, x, y }, i) => `C ${x1} ${y1}, ${x2} ${y2}, ${x} ${y}`
     )
 
-    let instructions = [`M ${object.moveX} ${object.moveY}`, ...curves]
+    let instructions = [`M ${object.movex} ${object.movey}`, ...curves]
 
     if (object.closed) {
       instructions = [...instructions, 'Z']
@@ -39,9 +41,9 @@ export class Path extends Vector {
     return instructions.join('\n')
   }
 
-  getTransformMatrix({ rotate, x, y, moveX, moveY }) {
+  getTransformMatrix({ rotate, x, y, movex, movey }) {
     return `
-      translate(${x - moveX} ${y - moveY})
+      translate(${x - movex} ${y - movey})
       rotate(${rotate} ${x} ${y})
     `
   }
