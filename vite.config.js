@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    base: isDevelopment ? '/' : '/react-designer',
     css: {
       modules: {
         generateScopedName: isDevelopment
