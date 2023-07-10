@@ -2,8 +2,6 @@ _This project is based on the [react-designer](https://github.com/react-designer
 
 # React-designer
 
-[![Join the chat at https://gitter.im/fatiherikli/react-designer](https://badges.gitter.im/fatiherikli/react-designer.svg)](https://gitter.im/fatiherikli/react-designer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Easy to configure, lightweight, editable vector graphics in your react components.
 
 - Supports polygon and shape designing (with bezier curves)
@@ -11,7 +9,7 @@ Easy to configure, lightweight, editable vector graphics in your react component
 - Custom object types and custom panels
 
 Examples and demonstration:
-<https://react-designer.github.io/react-designer/>
+<https://ticketplushq.github.io/react-designer>
 
 ![bezier editor](http://i.imgur.com/cqTleWB.gif)
 
@@ -251,3 +249,6 @@ Here is a todo list that in my mind. You could extend this list.
 
 - `Designer` component exported as default now.
 - Added `insertMenu` prop to `Designer` component.
+  5176 4001 3962 0396
+  12 26
+  109
