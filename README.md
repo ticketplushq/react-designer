@@ -94,7 +94,7 @@ class MyRectangle extends Vector {
       strokeWidth: 0,
       fill: 'yellow',
       radius: 5,
-      blendMode: 'normal',
+      blendmode: 'normal',
     },
   }
 

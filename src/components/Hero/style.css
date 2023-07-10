@@ -1,0 +1,73 @@
+.visual {
+  border: 1px solid #0062ff;
+  display: inline-block;
+  position: relative;
+  overflow: visible;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hero-title-text {
+  opacity: 1;
+  letter-spacing: 0;
+  -webkit-text-fill-color: transparent;
+  background-color: #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 6rem;
+  font-weight: 900;
+  display: inline-block;
+}
+
+.hero-title-text.dot {
+  color: #7b7c7e;
+  background-color: #f299a5;
+  font-size: 9rem;
+}
+
+.hero-box {
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #fff;
+  border: 1px solid #0062ff;
+  position: absolute;
+  top: 0;
+  bottom: auto;
+  left: 0;
+  right: auto;
+}
+
+.hero-box.bottom-right {
+  width: 0.6rem;
+  height: 0.6rem;
+  top: auto;
+  bottom: -5px;
+  left: auto;
+  right: -5px;
+}
+
+.hero-box.bottom-left {
+  width: 0.6rem;
+  height: 0.6rem;
+  top: auto;
+  bottom: -5px;
+  left: -5px;
+  right: auto;
+}
+
+.hero-box.top-right {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 0;
+  top: -5px;
+  bottom: auto;
+  left: auto;
+  right: -5px;
+}
+
+.hero-box.top-left {
+  width: 0.6rem;
+  height: 0.6rem;
+  top: -5px;
+  left: -5px;
+}

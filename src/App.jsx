@@ -1,9 +1,13 @@
 import { useState } from 'react'
-import { Designer, Rect, Text, Image } from './designer'
+import { Designer, Rect, Text, Image, Circle, Path } from './designer'
+import  { malevich } from './example/malevich'
+
 import './App.css'
+import { Hero } from './components/Hero'
+
 
 function App() {
-  const [state, setState] = useState([])
+  const [state, setState] = useState(structuredClone(malevich))
 
   const handleActive = (index, checked) => {
     setState((state) => {
@@ -35,24 +39,27 @@ function App() {
   const actives = state.filter((element) => element?.active)
 
   return (
-    <div>
-      <div>
+    <main className='container'>
+      <Hero title="React Designer"/>
+      <div className='designer-container'>
         <Designer
-          width={600}
+          width={400}
           height={400}
           objectTypes={{
             text: Text,
             rect: Rect,
+            circle: Circle,
+            polygon: Path,
             image: Image,
           }}
           onUpdate={handleUpdate}
           objects={actives}
         />
       </div>
-      <ul style={{ padding: '30px' }}>
+      <ul className='list-elements'>
         {state?.map((element, index) => (
-          <li key={element?.uuid}>
-            {element?.label}-{element?.uuid}
+          <li className='list-elements__item' key={element?.uuid}>
+            <span>{element?.label}</span>
             <input
               type="checkbox"
               checked={element?.active}
@@ -61,7 +68,7 @@ function App() {
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   )
 }
 
