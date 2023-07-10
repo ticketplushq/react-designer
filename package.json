@@ -13,7 +13,7 @@
     "build": "vite build",
     "build:lib": "webpack",
     "preview": "vite preview",
-    "deploy": "npm run build:lib && npm run publish",
+    "deploy": "npm run build:lib && npm publish",
     "predeploy": "npm run build",
     "deploy:page": "gh-pages -d dist"
   },
