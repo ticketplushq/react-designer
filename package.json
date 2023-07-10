@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "deploy": "npm run build:lib && npm run publish",
     "predeploy": "npm run build",
-    "deploy:page": "gh-pages -d build"
+    "deploy:page": "gh-pages -d dist"
   },
   "peerDependencies": {
     "react": "^17.0.2",
