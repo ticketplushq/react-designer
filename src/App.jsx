@@ -38,6 +38,7 @@ function App() {
 
   const actives = state.filter((element) => element?.active)
 
+
   return (
     <main className='container'>
       <Hero title="React Designer"/>
