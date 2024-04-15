@@ -23,6 +23,7 @@ export class Text extends Vector {
       isExpand: true,
       maxLength: 15,
       active: true,
+      hasUppercase: false
     },
   }
 
@@ -45,6 +46,8 @@ export class Text extends Vector {
 
   render() {
     let { object, index } = this.props
+    
+
     WebFont.load({
       google: {
         families: [object.fontFamily],
@@ -54,6 +57,7 @@ export class Text extends Vector {
     const textLength = object?.text?.trim().length
     const isExpand = object?.isExpand
     const maxLength = object?.maxLength
+    const hasUppercase = object?.hasUppercase
 
     return (
       <text
@@ -65,23 +69,25 @@ export class Text extends Vector {
         lengthAdjust={object?.lengthAdjust}
       >
         {textLength > maxLength && !isExpand ? (
-          <LineBreak object={object} maxLength={maxLength} />
+          <LineBreak object={object} maxLength={maxLength} hasUppercase={hasUppercase} />
         ) : (
-          object.text
+          <>{hasUppercase ?   object.text.toUpperCase(): object.text}</>
         )}
       </text>
     )
   }
 }
 
-function LineBreak({ object, maxLength }) {
+function LineBreak({ object, maxLength, hasUppercase }) {
   const hasSpace = object?.text?.includes(' ')
-  const words = hasSpace
-    ? object.text
-        .trim()
-        .split(' ')
-        .filter((w) => w.length)
+  let words = hasSpace
+    ? object.text.trim().split(' ').filter((w) => w.length)
     : [object?.text.trim()]
+  
+  if(hasUppercase) {
+    words = words.map(w => w.toUpperCase())
+  }
+
   const lines = lineBreak(words, maxLength)
   const hasMany = lines?.length > 1
   const firstLine = lines[0]
