@@ -8,3 +8,4 @@ export {
   ImagePanel,
 } from './panels'
 export { Designer } from './Designer'
+export { getImageDimensions, resizeDimensions } from './helpers/imageBackground'

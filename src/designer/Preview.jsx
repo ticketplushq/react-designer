@@ -12,6 +12,8 @@ class Preview extends Component {
       polygon: Path,
       image: Image,
     },
+    backgroundSize: 'auto',
+    backgroundImage: ''
   }
 
   componentWillMount() {
@@ -19,7 +21,15 @@ class Preview extends Component {
   }
 
   render() {
-    let { width, height, objects, objectTypes, responsive = false } = this.props
+    let { 
+      width, 
+      height, 
+      objects, 
+      objectTypes, 
+      responsive = false, 
+      backgroundSize, 
+      backgroundImage = null
+    } = this.props
 
     let style = {
       ...styles.container,
@@ -56,6 +66,8 @@ class Preview extends Component {
           objectTypes={objectTypes}
           onRender={(ref) => (this.svgElement = ref)}
           canvas={canvas}
+          backgroundSize={backgroundSize}
+          backgroundImage={backgroundImage}
         />
       </div>
     )

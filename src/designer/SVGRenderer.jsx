@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 
+
+const DEFAULT_BACKGROUND_IMG = 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5' +
+      'vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0' +
+      'PSIyMCIgZmlsbD0iI2ZmZiI+PC9yZWN0Pgo8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9I' +
+      'iNGN0Y3RjciPjwvcmVjdD4KPHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIG' +
+      'ZpbGw9IiNGN0Y3RjciPjwvcmVjdD4KPC9zdmc+)'
 class SVGRenderer extends Component {
   static defaultProps = {
     onMouseOver() {},
@@ -25,24 +31,30 @@ class SVGRenderer extends Component {
   }
 
   render() {
-    let { background, objects, svgStyle, canvas, onMouseDown, onRender } =
-      this.props
+    let { 
+      background, 
+      objects, 
+      svgStyle, 
+      canvas, 
+      onMouseDown, 
+      onRender, 
+      backgroundSize= 'auto' ,
+      backgroundImage= DEFAULT_BACKGROUND_IMG,
+    } =this.props
     let { width, height, canvasOffsetX, canvasOffsetY } = canvas
 
     let style = {
       ...styles.canvas,
-      ...(background
-        ? {
-            backgroundColor: background,
-          }
-        : styles.grid),
+      ...(background ? { backgroundColor: background} : styles.grid),
+      backgroundSize: backgroundSize,
+      backgroundImage: backgroundImage || DEFAULT_BACKGROUND_IMG,
       ...{
         ...svgStyle,
         marginTop: canvasOffsetY,
         marginLeft: canvasOffsetX,
       },
     }
-
+    
     return (
       <svg
         onMouseDown={onMouseDown}
@@ -61,15 +73,10 @@ class SVGRenderer extends Component {
 
 export const styles = {
   canvas: {
-    backgroundSize: 400,
+    backgroundSize: 'auto',
   },
   grid: {
-    backgroundImage:
-      'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5' +
-      'vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0' +
-      'PSIyMCIgZmlsbD0iI2ZmZiI+PC9yZWN0Pgo8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9I' +
-      'iNGN0Y3RjciPjwvcmVjdD4KPHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIG' +
-      'ZpbGw9IiNGN0Y3RjciPjwvcmVjdD4KPC9zdmc+)',
+    backgroundImage: DEFAULT_BACKGROUND_IMG,
     backgroundSize: 'auto',
   },
 }

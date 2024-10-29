@@ -26,6 +26,7 @@ class Designer extends Component {
     snapToGrid: 1,
     svgStyle: {},
     insertMenu: InsertMenu,
+    backgroundSize: 'auto'
   }
 
   state = {
@@ -384,7 +385,14 @@ class Designer extends Component {
   renderSVG() {
     let canvas = this.getCanvas()
     let { width, height, canvasOffsetX, canvasOffsetY } = canvas
-    let { background, objects, svgStyle, objectTypes } = this.props
+    let { 
+      background, 
+      objects, 
+      svgStyle, 
+      objectTypes, 
+      backgroundSize, 
+      backgroundImage = ''
+    } = this.props
 
     return (
       <SVGRenderer
@@ -398,6 +406,8 @@ class Designer extends Component {
         objectRefs={this.objectRefs}
         onRender={(ref) => (this.svgElement = ref)}
         onMouseDown={this.newObject.bind(this)}
+        backgroundSize={backgroundSize}
+        backgroundImage={backgroundImage}
       />
     )
   }

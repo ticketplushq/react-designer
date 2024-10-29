@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import { Designer, Rect, Text, Image, Circle, Path } from './designer'
-import  { malevich } from './example/malevich'
+import Dropzone from 'react-dropzone'
+import { useCallback, useEffect, useState } from 'react'
+import { Designer, Rect, Text, Image, Circle, Path, getImageDimensions, resizeDimensions } from './designer'
+import  { ticket } from './example/ticket'
 
 import './App.css'
 import { Hero } from './components/Hero'
+import { ticketImage } from './example/ticketBackground'
 
 
 function App() {
-  const [state, setState] = useState(structuredClone(malevich))
+  const [backgroundImage, setBackgroundImage] = useState(ticketImage.image)
+  const [imageDimensions, setImageDimensions] = useState({ width: 400, height: 400 })
+  const [state, setState] = useState(structuredClone(ticket))
 
   const handleActive = (index, checked) => {
     setState((state) => {
@@ -36,16 +40,42 @@ function App() {
     setState(newState)
   }
 
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length == 0) {
+      return
+    }
+    const file = acceptedFiles[0]
+    const fr = new FileReader()
+
+    fr.onload = (e) => {
+      setBackgroundImage(e.target.result)
+    }
+
+    fr.readAsDataURL(file)
+  }, [])
+
   const actives = state.filter((element) => element?.active)
 
+  useEffect(() => {
+    if(backgroundImage) {
+      getImageDimensions(backgroundImage)
+        .then(dimensions => {
+            const { width, height } = resizeDimensions(dimensions.width, dimensions.height)
+            setImageDimensions({ width, height })
+        })
+        .catch(error => {
+            console.error('Error al cargar la imagen:', error);
+        });
+    }
+  },[backgroundImage])
 
   return (
     <main className='container'>
       <Hero title="React Designer"/>
       <div className='designer-container'>
         <Designer
-          width={400}
-          height={400}
+          width={imageDimensions.width}
+          height={imageDimensions.height}
           objectTypes={{
             text: Text,
             rect: Rect,
@@ -55,8 +85,22 @@ function App() {
           }}
           onUpdate={handleUpdate}
           objects={actives}
+          backgroundSize="contain"
+          backgroundImage={backgroundImage ? `url(${backgroundImage})`: null}
         />
       </div>
+      <Dropzone
+        accept="image/*"
+        onDrop={onDrop}
+        multiple={false}
+      >
+        {({ getRootProps, getInputProps }) => (
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            <p style={{ backgroundColor: 'white', padding: '5px 10px', cursor: 'pointer'}}>Background image</p>
+          </div>
+        )}
+      </Dropzone>
       <ul className='list-elements'>
         {state?.map((element, index) => (
           <li className='list-elements__item' key={element?.uuid}>
@@ -72,5 +116,7 @@ function App() {
     </main>
   )
 }
+
+
 
 export default App
