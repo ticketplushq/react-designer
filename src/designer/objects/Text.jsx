@@ -23,12 +23,14 @@ export class Text extends Vector {
       isExpand: true,
       maxLength: 15,
       active: true,
-      hasUppercase: false
+      hasUppercase: false,
+      writingMode: 'horizontal-tb',
+      textOrientation: 'mixed', 
     },
   }
 
   getStyle() {
-    let { object } = this.props
+    let { object } = this.props;
     return {
       ...super.getStyle(),
       dominantBaseline: 'central',
@@ -37,8 +39,11 @@ export class Text extends Vector {
       textDecoration: object.textDecoration,
       mixBlendMode: object.blendmode,
       WebkitUserSelect: 'none',
-    }
+      writingMode: object.writingMode, // Añadir modo de escritura
+      textOrientation: object.textOrientation, // Añadir orientación de texto
+    };
   }
+  
 
   getTransformMatrix({ rotate, x, y }) {
     return `rotate(${rotate} ${x} ${y})`
@@ -53,7 +58,7 @@ export class Text extends Vector {
         families: [object.fontFamily],
       },
     })
-    const { rotate, ...restOfAttributes } = this.getObjectAttributes()
+    const { rotate, writingMode, ...restOfAttributes } = this.getObjectAttributes()
     const textLength = object?.text?.trim().length
     const isExpand = object?.isExpand
     const maxLength = object?.maxLength
@@ -63,6 +68,7 @@ export class Text extends Vector {
       <text
         style={this.getStyle()}
         {...restOfAttributes}
+        writingMode={object.writingMode} // Añadir modo de escritura
         textAnchor={object.textAnchor}
         fontSize={object.fontSize}
         fontFamily={object.fontFamily}
@@ -71,10 +77,10 @@ export class Text extends Vector {
         {textLength > maxLength && !isExpand ? (
           <LineBreak object={object} maxLength={maxLength} hasUppercase={hasUppercase} />
         ) : (
-          <>{hasUppercase ?   object.text.toUpperCase(): object.text}</>
+          <>{hasUppercase ? object.text.toUpperCase() : object.text}</>
         )}
       </text>
-    )
+    );
   }
 }
 

@@ -160,6 +160,42 @@ export const TextPanel = ({ onChange, object }) => {
             />
           </RowFlex>
         )}
+        {hasProperty('writingMode') && (
+          <>
+            <RowFlex>
+              <NameItem>Writing Mode:</NameItem>
+            </RowFlex>
+            <RowFlex>
+              <RadioGroup
+                  name="writingMode"
+                  defaultValue={object.writingMode}
+                  onChange={({ value }) => onChange('writingMode', value)}
+                >
+                  <RadioInput value="horizontal-tb" label="Horizontal" />
+                  <RadioInput value="vertical-rl" label="Vert(R to L)" />
+                  <RadioInput value="vertical-lr" label="Vert(L to R)" />
+                </RadioGroup>
+            </RowFlex>
+          </>
+        )}
+        {hasProperty('textOrientation') && (
+          <>
+            <RowFlex>
+              <NameItem>Text Orientation:</NameItem>
+            </RowFlex>
+            <RowFlex>
+              <RadioGroup
+                  name="textOrientation"
+                  defaultValue={object.textOrientation}
+                  onChange={({ value }) => onChange('textOrientation', value)}
+                >
+                  <RadioInput value="mixed" label="Mixed" />
+                  <RadioInput value="upright" label="Upright" />
+                  <RadioInput value="sideways" label="Sideways" />
+                </RadioGroup>
+            </RowFlex>
+          </>
+        )}
         <RowFlex>
           <NameItem>Font family:</NameItem>
           <select value={object.fontFamily} onChange={handleFontFamilyChange}>
