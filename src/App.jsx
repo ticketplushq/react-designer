@@ -24,7 +24,8 @@ function App() {
 
   const handleUpdate = (updateState, action) => {
     const isEmpetyState = state?.length === 0
-
+    console.log('updateState', updateState)
+    console.log(updateState)
     if (isEmpetyState || action?.remove || action?.arrange)
       return setState([...updateState])
 

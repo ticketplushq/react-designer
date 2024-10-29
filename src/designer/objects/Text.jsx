@@ -26,6 +26,7 @@ export class Text extends Vector {
       hasUppercase: false,
       writingMode: 'horizontal-tb',
       textOrientation: 'mixed', 
+      letterSpacing: 0,
     },
   }
 
@@ -41,6 +42,7 @@ export class Text extends Vector {
       WebkitUserSelect: 'none',
       writingMode: object.writingMode, // Añadir modo de escritura
       textOrientation: object.textOrientation, // Añadir orientación de texto
+      letterSpacing: `${object.letterSpacing}px`,
     };
   }
   
