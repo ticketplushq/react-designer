@@ -1,6 +1,4 @@
-import React, { Component, useState } from 'react'
-import ReactDOM from 'react-dom'
-import Icon from './Icon'
+import React from 'react'
 
 function ScaleAnchor(props) {
   let { boundingBox } = props
@@ -8,7 +6,7 @@ function ScaleAnchor(props) {
     marginTop: boundingBox.height + 5,
     marginLeft: boundingBox.width + 5,
   }
-  let [anchorHovered, setAnchorHovered] = useState(false)
+  let [anchorHovered, setAnchorHovered] = React.useState(false)
   return (
     <div
       style={{
@@ -29,7 +27,7 @@ function RotateAnchor(props) {
   let style = {
     marginLeft: props.boundingBox.width + 5,
   }
-  let [anchorHovered, setAnchorHovered] = useState(false)
+  let [anchorHovered, setAnchorHovered] = React.useState(false)
   return (
     <div
       style={{
@@ -46,7 +44,7 @@ function RotateAnchor(props) {
   )
 }
 
-class Handler extends Component {
+class Handler extends React.Component {
   onMouseDown(event) {
     // event.preventDefault();
 

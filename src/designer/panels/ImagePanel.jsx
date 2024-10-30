@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import React from 'react'
 import _ from 'lodash'
 import Dropzone from 'react-dropzone'
 import PropertyGroup from './PropertyGroup'
@@ -12,7 +12,7 @@ import styles from './styles'
 
 export const ImagePanel = ({ onChange, object }) => {
   const [hasProperty] = useHasProperty(object)
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = React.useCallback((acceptedFiles) => {
     if (acceptedFiles.length == 0) {
       return
     }

@@ -15,3 +15,119 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
+<!--Ejemplo de useo en html simple-->
+<!-- 
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplo de React Designer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="ZPLDesigner" class="col s12 m12">
+      <div id="canvas-container"></div>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="/lib/index.umd.js"></script>
+    <script>
+      const ReactDesigner = window['@ticketplushq/react-designer']
+
+      const App = () => {
+        const [backgroundImage, setBackgroundImage] = React.useState(
+          'https://cdn2.ticketplus.cl/images/ticket_templates/default_image_red.png'
+        )
+        const [imageDimensions, setImageDimensions] = React.useState({
+          width: 400,
+          height: 400,
+        })
+        const [state, setState] = React.useState([])
+
+        const handleActive = (index, checked) => {
+          setState((state) => {
+            const newState = [...state]
+            const element = newState[index]
+            newState[index] = { ...element, active: checked }
+            return newState
+          })
+        }
+
+        const handleUpdate = (updateState, action) => {
+          const isEmpetyState = state?.length === 0
+          if (isEmpetyState || action?.remove || action?.arrange)
+            return setState([...updateState])
+
+          const newState = [...state]
+          updateState.forEach((element) => {
+            const currentIndex = state.findIndex(
+              (e) => e?.uuid === element?.uuid
+            )
+            if (currentIndex !== -1) {
+              newState[currentIndex] = { ...element }
+            } else {
+              newState.push({ ...element })
+            }
+          })
+          setState(newState)
+        }
+
+        React.useEffect(() => {
+          if (backgroundImage) {
+            ReactDesigner.getImageDimensions(backgroundImage)
+              .then((dimensions) => {
+                const { width, height } = ReactDesigner.resizeDimensions(
+                  dimensions.width,
+                  dimensions.height
+                )
+                setImageDimensions({ width, height })
+              })
+              .catch((error) => {
+                console.error('Error al cargar la imagen:', error)
+              })
+          }
+        }, [backgroundImage])
+
+        const actives = state.filter((element) => element?.active)
+
+        return React.createElement(
+          'div',
+          null,
+          React.createElement(
+            ReactDesigner.Designer,
+            {
+              showPanel: true,
+              width: imageDimensions.width,
+              height: imageDimensions.height,
+              objectTypes: {
+                text: ReactDesigner.Text,
+                rect: ReactDesigner.Rect,
+                circle: ReactDesigner.Circle,
+                polygon: ReactDesigner.Path,
+                image: ReactDesigner.Image,
+              },
+              onUpdate: handleUpdate,
+              objects: actives,
+              backgroundSize: 'contain',
+              backgroundImage: backgroundImage
+                ? `url(${backgroundImage})`
+                : null,
+            },
+            null
+          )
+        )
+      }
+
+      const container = document.getElementById('ZPLDesigner')
+      const root = ReactDOM.createRoot(container)
+      root.render(React.createElement(App))
+    </script>
+  </body>
+</html> -->

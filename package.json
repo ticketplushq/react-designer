@@ -11,7 +11,9 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:lib": "webpack",
+    "build:umd": "webpack --config webpack.umd.config.js",
+    "build:cjs": "webpack --config webpack.cjs.config.js",
+    "build:lib": "npm run build:umd && npm run build:cjs",
     "preview": "vite preview",
     "deploy": "npm run build:lib && npm publish",
     "predeploy": "npm run build",
@@ -44,7 +46,7 @@
     "gh-pages": "^5.0.0",
     "style-loader": "^3.3.3",
     "vite": "4.4.2",
-    "webpack": "^5.88.1",
+    "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0"
   },
