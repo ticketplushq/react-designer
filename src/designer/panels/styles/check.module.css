@@ -1,6 +1,7 @@
 .container {
   color: #868585;
   display: flex;
+  gap: 2px;
   align-items: center;
 }
 
@@ -15,5 +16,9 @@
 }
 
 .check:checked + svg {
+  color: #000;
+}
+
+.check:checked + span {
   color: #000;
 }

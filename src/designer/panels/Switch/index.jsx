@@ -1,6 +1,7 @@
 import style from '../styles/check.module.css'
 
 export const Switch = ({
+  text,
   label,
   icon,
   defaultValue,
@@ -24,6 +25,7 @@ export const Switch = ({
         defaultChecked={defaultChecked}
       />
       {icon && icon}
+      {text && <span>{text}</span>}
     </label>
   )
 }

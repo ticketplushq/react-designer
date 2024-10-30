@@ -1,13 +1,5 @@
 import _ from 'lodash'
 import WebFont from 'webfontloader'
-import {
-  AlignCenter,
-  AlignLeft,
-  AlignRight,
-  Bold,
-  Italic,
-  Underline,
-} from 'iconoir-react'
 import { useHasProperty } from '../hooks/useHasProperty'
 import PropertyGroup from './PropertyGroup'
 import { GridContainer } from './GridContainer'
@@ -74,10 +66,12 @@ export const TextPanel = ({ onChange, object }) => {
         </RowFlex>
         <RowFlex>
           <NameItem>Text style:</NameItem>
+        </RowFlex>
+        <RowFlex>
           {hasProperty('fontWeight') && (
             <Switch
               label="fontWeight"
-              icon={<Bold />}
+              text="Bold"
               defaultValue="normal"
               nextValue="bold"
               onChange={(value) => onChange('fontWeight', value)}
@@ -86,7 +80,7 @@ export const TextPanel = ({ onChange, object }) => {
           {hasProperty('fontStyle') && (
             <Switch
               label="fontStyle"
-              icon={<Italic />}
+              text="Italic"
               defaultValue="normal"
               nextValue="italic"
               onChange={(value) => onChange('fontStyle', value)}
@@ -94,7 +88,7 @@ export const TextPanel = ({ onChange, object }) => {
           )}
           {hasProperty('textDecoration') && (
             <Switch
-              icon={<Underline />}
+              text="Underline"
               defaultValue="none"
               nextValue="underline"
               onChange={(value) => onChange('textDecoration', value)}
@@ -102,18 +96,22 @@ export const TextPanel = ({ onChange, object }) => {
           )}
         </RowFlex>
         {hasProperty('textAnchor') && (
+          <>
           <RowFlex>
             <NameItem>Align text:</NameItem>
+          </RowFlex>
+          <RowFlex>
             <RadioGroup
               name="textAnchor"
               defaultValue={object.textAnchor}
               onChange={({ value }) => handleTextAnchor(value)}
             >
-              <RadioInput value="start" icon={<AlignLeft />} />
-              <RadioInput value="middle" icon={<AlignCenter />} />
-              <RadioInput value="end" icon={<AlignRight />} />
+              <RadioInput value="start" label="Left" />
+              <RadioInput value="middle" label="Center" />
+              <RadioInput value="end" label="Right" />
             </RadioGroup>
           </RowFlex>
+          </>
         )}
 
         {hasProperty('fontSize') && (
