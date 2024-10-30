@@ -75,6 +75,7 @@ function App() {
       <Hero title="React Designer"/>
       <div className='designer-container'>
         <Designer
+          showPanel
           width={imageDimensions.width}
           height={imageDimensions.height}
           objectTypes={{

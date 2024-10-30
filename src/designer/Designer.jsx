@@ -26,7 +26,8 @@ class Designer extends Component {
     snapToGrid: 1,
     svgStyle: {},
     insertMenu: InsertMenu,
-    backgroundSize: 'auto'
+    backgroundSize: 'auto',
+    showPanel: false,
   }
 
   state = {
@@ -608,15 +609,15 @@ class Designer extends Component {
           </div>
 
           {/* Right Panel: Displays text, styling and sizing tools */}
-          {showPropertyPanel && currentObject && (
-            <PanelList
-              id={this.props.id}
-              object={objectWithInitial}
-              onArrange={this.handleArrange.bind(this)}
-              onChange={this.handleObjectChange.bind(this)}
-              objectComponent={objectComponent}
-            />
-          )}
+          <PanelList
+            show={this.props.showPanel}
+            showPanels={showPropertyPanel && currentObject}
+            id={this.props.id}
+            object={objectWithInitial}
+            onArrange={this.handleArrange.bind(this)}
+            onChange={this.handleObjectChange.bind(this)}
+            objectComponent={objectComponent}
+          />
         </div>
       </HotKeys>
     )

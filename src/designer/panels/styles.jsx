@@ -2,9 +2,12 @@ export default {
   propertyPanel: {
     position: 'relative',
     width: 240,
-    padding: '0 5px 6px 5px',
+    height: '400px',
+    overflowY: 'auto',
+    padding: '5px 0 0 3px',
     fontFamily: '"Lucida Grande", sans-serif',
-    fontSize: 11
+    fontSize: 11,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   propertyGroup: {
     backgroundColor: '#f1f1f1',
