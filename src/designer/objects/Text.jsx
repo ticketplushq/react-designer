@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { modes } from '../constants'
+import React from 'react'
 import Icon from '../Icon'
 
 import { Vector } from './Vector'
@@ -86,30 +85,26 @@ export class Text extends Vector {
   }
 }
 
-function LineBreak({ object, maxLength, hasUppercase }) {
+function LineBreak({ object, maxLength, hasUppercase = false }) {
   const hasSpace = object?.text?.includes(' ')
   let words = hasSpace
     ? object.text.trim().split(' ').filter((w) => w.length)
     : [object?.text.trim()]
-  
-  if(hasUppercase) {
-    words = words.map(w => w.toUpperCase())
-  }
 
   const lines = lineBreak(words, maxLength)
   const hasMany = lines?.length > 1
-  const firstLine = lines[0]
+  const firstLine = lines?.[0]
 
   return (
     <>
       <tspan x={object?.x} dy="0em">
-        {firstLine}
+        {(hasUppercase && firstLine) ? firstLine.toUpperCase(): firstLine}
       </tspan>
 
       {hasMany &&
         lines.slice(1, lines.length).map((t, index) => (
           <tspan key={t} x={object?.x} dy="1.03em">
-            {t}
+            {(hasUppercase && t) ? t.toUpperCase() : t}
           </tspan>
         ))}
     </>
