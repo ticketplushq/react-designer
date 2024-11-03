@@ -8,7 +8,7 @@ import { GridContainer } from './GridContainer'
 import { NameItem } from './NameItem'
 import { Switch } from './Switch'
 import { useHasProperty } from '../hooks/useHasProperty'
-import styles from './styles'
+import styles from './styles/panel.module.css'
 
 export const ImagePanel = ({ onChange, object }) => {
   const [hasProperty] = useHasProperty(object)
@@ -28,7 +28,7 @@ export const ImagePanel = ({ onChange, object }) => {
   }, [])
 
   return (
-    <PropertyGroup object={object} showIf={_.has(object, 'xlinkHref')}>
+    <PropertyGroup className="react-designer-image-panel" object={object} showIf={_.has(object, 'xlinkHref')}>
       <GridContainer>
         {hasProperty('active') && (
           <RowFlex>
@@ -43,7 +43,7 @@ export const ImagePanel = ({ onChange, object }) => {
         <NameItem>Label:</NameItem>
         <RowFlex>
           <input
-            style={{ ...styles.input, ...styles.textInput }}
+            className={`${styles.input} ${styles.textInput}`}
             onChange={(e) => onChange('label', e.target.value)}
             value={object.label}
           />

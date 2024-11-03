@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 
-import Icon from '../Icon'
-
-import styles from './styles'
 import PropertyGroup from './PropertyGroup'
-import Button from './Button'
-import SwitchState from './SwitchState'
 import Columns from './Columns'
 import Column from './Column'
 
@@ -14,7 +9,7 @@ export class SizePanel extends Component {
   render() {
     let { object } = this.props
     return (
-      <PropertyGroup object={object}>
+      <PropertyGroup className="react-designer-size-panel" object={object}>
         {_.has(object, 'width', 'height') && (
           <Columns label="Size">
             <Column

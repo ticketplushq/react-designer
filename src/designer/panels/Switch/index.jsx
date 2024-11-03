@@ -3,7 +3,6 @@ import style from '../styles/check.module.css'
 export const Switch = ({
   text,
   label,
-  icon,
   defaultValue,
   nextValue,
   onChange,
@@ -16,15 +15,14 @@ export const Switch = ({
   }
 
   return (
-    <label htmlFor={label} className={style.container}>
+    <label htmlFor={label} className={`${style.container} react-designer-switch-label`}>
       <input
-        className={icon ? style.check : ''}
+        className='react-designer-switch-input'
         id={label}
         type="checkbox"
         onChange={handleCheck}
         defaultChecked={defaultChecked}
       />
-      {icon && icon}
       {text && <span>{text}</span>}
     </label>
   )

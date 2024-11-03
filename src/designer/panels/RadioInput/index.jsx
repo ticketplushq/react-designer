@@ -5,7 +5,6 @@ export const RadioInput = ({
   value,
   defaultValue,
   onChange,
-  icon,
   label,
 }) => {
   const handleChange = (event) => {
@@ -16,16 +15,15 @@ export const RadioInput = ({
   const checked = value === defaultValue
 
   return (
-    <label className={style.container}>
+    <label className={`${style.container} react-designer-radio-label`}>
       <input
-        className={icon ? style.check : ''}
+        className='react-designer-radio-input'
         name={name}
         type="radio"
         value={value}
         defaultChecked={checked}
         onChange={handleChange}
       />
-      {icon && icon}
       {label && <span>{label}</span>}
     </label>
   )

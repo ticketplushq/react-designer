@@ -1,15 +1,12 @@
-import React, {Component} from 'react';
-import _ from 'lodash';
-import Icon from '../Icon';
+import React from 'react';
+import styles from './styles/panel.module.css'
 
-import styles from './styles';
-
-const PropertyGroup = ({showIf=true, ...props}) => {
+const PropertyGroup = ({showIf=true , className, ...props}) => {
   if (!showIf) {
-    return <div style={styles.empty} />;
+    return <div className={styles.empty} />;
   }
   return (
-    <div style={styles.propertyGroup}>
+    <div className={`${styles.group} react-designer-panel-group ${className || ''}`}>
       {props.children}
     </div>
   );

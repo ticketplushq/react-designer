@@ -2,6 +2,14 @@
   position: relative;
   width: 240;
   max-height: 500px;
+  position: relative;
+  width: 240px;
+  height: 400px;
+  overflow-y: auto;
+  padding: 5px 0 0 3px;
+  font-family: 'Lucida Grande', sans-serif;
+  font-size: 11px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .container::-webkit-scrollbar-track {
@@ -18,4 +26,77 @@
 .container::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(122, 153, 217, 0.5);
+}
+
+.group {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding-bottom: 12px;
+  padding-top: 2px;
+  padding-left: 10px;
+  border: 0px solid #d3d3d3;
+  margin-bottom: 5px;
+}
+
+.input {
+  border-width: 0;
+  padding: 3px 5px;
+  color: gray;
+  border-radius: 3px;
+  background: #e1e1e1;
+}
+
+.empty {
+  display: none;
+}
+
+.integerInput {
+  width: 50px;
+  outline: none;
+}
+
+.textInput {
+  margin-top: 2px;
+  outline: none;
+  width: 100%;
+  padding: 3px;
+}
+
+.select {
+  border-width: 0;
+  padding: 3px 3px 3px 5px;
+  outline: none;
+  border-radius: 0;
+  border-right: 3px solid #b7b7b7;
+  color: rgb(128, 128, 128);
+  width: 75px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: min-content;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  margin-top: 10px;
+}
+
+.column {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.inputHelper {
+  font-size: 9px;
+  color: #d2d2d2;
+  padding-top: 2px;
+  padding-left: 5px;
+}
+
+.panelTitle {
+  float: left;
+  width: 60px;
+  padding: 3px;
+  color: #b8b8b8;
 }

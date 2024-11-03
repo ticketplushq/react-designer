@@ -1,16 +1,6 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
-import { Portal } from 'react-portal';
-
-import Icon from '../Icon';
-
-import styles from './styles';
 import PropertyGroup from './PropertyGroup';
-import Button from './Button';
-import SwitchState from './SwitchState';
-import Columns from './Columns';
-import Column from './Column';
-import styleCss from './styles/panel.module.css'
+import styles from './styles/panel.module.css'
 import { NameItem } from './NameItem';
 import { RowFlex } from './RowFlex';
 
@@ -19,12 +9,11 @@ class PanelList extends Component {
     let {object, objectComponent, id, showPanels, show = false} = this.props;
 
     return (
-      <div 
+      <div
         style={{
-          ...styles.propertyPanel, 
           display: showPanels || show ? 'block' : 'none'
         }} 
-        className={styleCss.container}
+        className={`${styles.container} react-designer-panel-list`}
       >
         {showPanels && objectComponent.panels.map((Panel, i) => <Panel key={i} id={id} {...this.props} />)}
         {show && !showPanels && (

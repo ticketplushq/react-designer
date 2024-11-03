@@ -9,7 +9,7 @@ import { Switch } from './Switch'
 import { RadioGroup } from './RadioGroup'
 import { RadioInput } from './RadioInput'
 import { fontFamilies } from '../utils/fontFamilies'
-import styles from './styles'
+import styles from './styles/panel.module.css'
 
 export const TextPanel = ({ onChange, object }) => {
   const [hasProperty] = useHasProperty(object)
@@ -36,7 +36,7 @@ export const TextPanel = ({ onChange, object }) => {
       : 0
 
   return (
-    <PropertyGroup showIf={_.has(object, 'text')}>
+    <PropertyGroup className="react-designer-text-panel" showIf={_.has(object, 'text')}>
       <GridContainer>
         {hasProperty('active') && (
           <RowFlex>
@@ -51,7 +51,7 @@ export const TextPanel = ({ onChange, object }) => {
         <NameItem>Text:</NameItem>
         <RowFlex>
           <input
-            style={{ ...styles.input, ...styles.textInput }}
+            className={`${styles.input} ${styles.textInput}`}
             onChange={(e) => onChange('text', e.target.value)}
             value={object.text}
           />
@@ -59,7 +59,7 @@ export const TextPanel = ({ onChange, object }) => {
         <NameItem>Label:</NameItem>
         <RowFlex>
           <input
-            style={{ ...styles.input, ...styles.textInput }}
+            className={`${styles.input} ${styles.textInput}`}
             onChange={(e) => onChange('label', e.target.value)}
             value={object.label}
           />
@@ -120,7 +120,8 @@ export const TextPanel = ({ onChange, object }) => {
             <input
               min={1}
               type="number"
-              style={{ ...styles.input, ...styles.integerInput, width: 50 }}
+              className={`${styles.input} ${styles.textInput}`}
+              style={{width: 50 }}
               value={object.fontSize}
               onChange={(e) => onChange('fontSize', e.target.value)}
             />
@@ -152,7 +153,8 @@ export const TextPanel = ({ onChange, object }) => {
             <input
               min={2}
               type="number"
-              style={{ ...styles.input, ...styles.integerInput, width: 50 }}
+              className={`${styles.input} ${styles.textInput}`}
+              style={{ width: 50 }}
               value={object.maxLength}
               onChange={(e) => onChange('maxLength', e.target.value)}
             />
@@ -164,7 +166,8 @@ export const TextPanel = ({ onChange, object }) => {
             <input
               type="number"
               min={-10} // Valor mínimo para permitir espaciado negativo
-              style={{ ...styles.input, width: 60 }}
+              className={styles.input}
+              style={{ width: 60 }}
               value={object.letterSpacing}
               onChange={(e) => onChange('letterSpacing', parseInt(e.target.value, 10))}
             />
@@ -208,7 +211,7 @@ export const TextPanel = ({ onChange, object }) => {
         )}
         <RowFlex>
           <NameItem>Font family:</NameItem>
-          <select value={object.fontFamily} onChange={handleFontFamilyChange}>
+          <select className="react-designer-select" value={object.fontFamily} onChange={handleFontFamilyChange}>
             {fontFamilies.sort(sortFonts).map(({ name, family }) => (
               <option key={family} value={family}>
                 {name}
