@@ -4,7 +4,7 @@ import styles from './styles/panel.module.css'
 
 const Column = ({showIf=true, ...props}) => {
   if (!showIf) {
-    return <div style={styles.empty} />;
+    return <div className={styles.empty} />;
   }
 
   return (

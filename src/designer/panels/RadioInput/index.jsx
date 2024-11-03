@@ -24,7 +24,7 @@ export const RadioInput = ({
         defaultChecked={checked}
         onChange={handleChange}
       />
-      {label && <span>{label}</span>}
+      {label && <span className='react-designer-radio-span'>{label}</span>}
     </label>
   )
 }

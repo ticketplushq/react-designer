@@ -23,7 +23,7 @@ export const Switch = ({
         onChange={handleCheck}
         defaultChecked={defaultChecked}
       />
-      {text && <span>{text}</span>}
+      {text && <span className='react-designer-switch-span'>{text}</span>}
     </label>
   )
 }
