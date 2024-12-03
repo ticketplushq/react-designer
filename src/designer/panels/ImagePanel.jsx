@@ -49,6 +49,18 @@ export const ImagePanel = ({ onChange, object }) => {
           />
         </RowFlex>
         <RowFlex>
+          <NameItem>Image Type:</NameItem>
+          <select 
+            className="react-designer-select"
+            value={object.imageType}
+            onChange={(e) => onChange('imageType', e.target.value)}
+          >
+            <option value="normal">Normal</option>
+            <option value="barcode">Barcode</option>
+            <option value="qrcode">QR Code</option>
+          </select>
+        </RowFlex>
+        <RowFlex>
           <NameItem>Image:</NameItem>
           <Dropzone
             accept="image/*"

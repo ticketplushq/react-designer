@@ -13,6 +13,7 @@ export class Image extends Vector {
       active: true,
       width: 100,
       height: 100,
+      imageType: 'normal',
       // Just a simple base64-encoded outline
       xlinkHref:
         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAhSURBVHgBtYmxDQAADII8lv9faBNH4yoJLAi4ppxgMZoPoxQrXYyeEfoAAAAASUVORK5CYII=',
