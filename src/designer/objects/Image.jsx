@@ -13,6 +13,7 @@ export class Image extends Vector {
       active: true,
       width: 100,
       height: 100,
+      rotate: 0,
       imageType: 'normal',
       // Just a simple base64-encoded outline
       xlinkHref:
