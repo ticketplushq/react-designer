@@ -1,6 +1,6 @@
 {
   "name": "@ticketplushq/react-designer",
-  "version": "1.5.65",
+  "version": "1.5.66",
   "description": "Design Editor Tools with React.js",
   "homepage": "https://ticketplushq.github.io/react-designer",
   "main": "lib/index.js",
