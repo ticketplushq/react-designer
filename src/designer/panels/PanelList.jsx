@@ -3,6 +3,7 @@ import PropertyGroup from './PropertyGroup';
 import styles from './styles/panel.module.css'
 import { NameItem } from './NameItem';
 import { RowFlex } from './RowFlex';
+import { version } from '../../../package.json';
 
 class PanelList extends Component {
   render() {
@@ -18,6 +19,10 @@ class PanelList extends Component {
         {showPanels && objectComponent.panels.map((Panel, i) => <Panel key={i} id={id} {...this.props} />)}
         {show && !showPanels && (
             <PropertyGroup showIf>
+               {/*motrar version del editor*/}
+              <RowFlex>
+                <NameItem>v{version}</NameItem>
+              </RowFlex>
               <RowFlex>
                 <NameItem>Tools Panel</NameItem>
               </RowFlex>
