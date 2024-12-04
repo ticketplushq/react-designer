@@ -165,11 +165,25 @@ export const TextPanel = ({ onChange, object }) => {
             <NameItem>Letter Spacing (px):</NameItem>
             <input
               type="number"
-              min={-10} // Valor mínimo para permitir espaciado negativo
+              min={-10}
               className={styles.input}
               style={{ width: 60 }}
               value={object.letterSpacing}
               onChange={(e) => onChange('letterSpacing', parseInt(e.target.value, 10))}
+            />
+          </RowFlex>
+        )}
+        {hasProperty('lineHeight') && (
+          <RowFlex>
+            <NameItem>Line Height:</NameItem>
+            <input
+              type="number"
+              min={0.1}
+              step={0.1}
+              className={styles.input}
+              style={{ width: 60 }}
+              value={object.lineHeight}
+              onChange={(e) => onChange('lineHeight', parseFloat(e.target.value))}
             />
           </RowFlex>
         )}

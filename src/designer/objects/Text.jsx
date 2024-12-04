@@ -26,6 +26,7 @@ export class Text extends Vector {
       writingMode: 'horizontal-tb',
       textOrientation: 'mixed', 
       letterSpacing: 0,
+      lineHeight: 1, // Añadir lineHeight inicial
     },
   }
 
@@ -42,6 +43,7 @@ export class Text extends Vector {
       writingMode: object.writingMode, // Añadir modo de escritura
       textOrientation: object.textOrientation, // Añadir orientación de texto
       letterSpacing: `${object.letterSpacing}px`,
+      lineHeight: `${object.lineHeight}px`, // Añadir lineHeight al estilo
     };
   }
   
@@ -65,6 +67,8 @@ export class Text extends Vector {
     const maxLength = object?.maxLength
     const hasUppercase = object?.hasUppercase
 
+    const hasLineBreak = textLength > maxLength && !isExpand
+
     return (
       <text
         style={this.getStyle()}
@@ -75,7 +79,7 @@ export class Text extends Vector {
         fontFamily={object.fontFamily}
         lengthAdjust={object?.lengthAdjust}
       >
-        {textLength > maxLength && !isExpand ? (
+        {hasLineBreak? (
           <LineBreak object={object} maxLength={maxLength} hasUppercase={hasUppercase} />
         ) : (
           <>{hasUppercase ? object.text.toUpperCase() : object.text}</>
@@ -94,6 +98,9 @@ function LineBreak({ object, maxLength, hasUppercase = false }) {
   const lines = lineBreak(words, maxLength)
   const hasMany = lines?.length > 1
   const firstLine = lines?.[0]
+  
+  // Calcular el espaciado vertical basado en lineHeight y fontSize
+  const lineSpacing = (object.lineHeight || 1) * object.fontSize
 
   return (
     <>
@@ -103,7 +110,7 @@ function LineBreak({ object, maxLength, hasUppercase = false }) {
 
       {hasMany &&
         lines.slice(1, lines.length).map((t, index) => (
-          <tspan key={t} x={object?.x} dy="1.03em">
+          <tspan key={t} x={object?.x} dy={`${lineSpacing}px`}>
             {(hasUppercase && t) ? t.toUpperCase() : t}
           </tspan>
         ))}
