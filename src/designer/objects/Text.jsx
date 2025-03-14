@@ -23,6 +23,7 @@ export class Text extends Vector {
       maxLength: 15,
       active: true,
       hasUppercase: false,
+      preserveCase: true,
       writingMode: 'horizontal-tb',
       textOrientation: 'mixed', 
       letterSpacing: 0,
@@ -65,7 +66,7 @@ export class Text extends Vector {
     const textLength = object?.text?.trim().length
     const isExpand = object?.isExpand
     const maxLength = object?.maxLength
-    const hasUppercase = object?.hasUppercase
+    const preserveCase = object?.preserveCase ?? true
 
     const hasLineBreak = textLength > maxLength && !isExpand
 
@@ -80,40 +81,66 @@ export class Text extends Vector {
         lengthAdjust={object?.lengthAdjust}
       >
         {hasLineBreak? (
-          <LineBreak object={object} maxLength={maxLength} hasUppercase={hasUppercase} />
+          <LineBreak object={object} maxLength={maxLength} preserveCase={preserveCase} />
         ) : (
-          <>{hasUppercase ? object.text.toUpperCase() : object.text}</>
+          <>{!preserveCase ? object.text.toUpperCase() : object.text}</>
         )}
       </text>
     );
   }
 }
 
-function LineBreak({ object, maxLength, hasUppercase = false }) {
-  const hasSpace = object?.text?.includes(' ')
+function LineBreak({ object, maxLength, preserveCase = true }) {
+  // Almacenar el texto original para preservar mayúsculas/minúsculas
+  const originalText = object?.text?.trim() || '';
+  
+  const hasSpace = originalText.includes(' ');
+  
+  // Para procesar los saltos de línea, trabajamos con el texto en el formato deseado
+  const processText = !preserveCase ? originalText.toUpperCase() : originalText;
+  
   let words = hasSpace
-    ? object.text.trim().split(' ').filter((w) => w.length)
-    : [object?.text.trim()]
+    ? processText.split(' ').filter((w) => w.length)
+    : [processText];
 
-  const lines = lineBreak(words, maxLength)
-  const hasMany = lines?.length > 1
-  const firstLine = lines?.[0]
+  const lines = lineBreak(words, maxLength);
+  const hasMany = lines?.length > 1;
+  
+  // Mapear las líneas de vuelta al texto original para preservar mayúsculas/minúsculas
+  const originalLines = [];
+  let currentPos = 0;
+  
+  // Solo necesitamos este proceso especial si queremos preservar el caso original
+  if (preserveCase) {
+    // Para cada línea procesada, encontramos el texto correspondiente en el original
+    lines.forEach(line => {
+      const lineLength = line.length;
+      // Extraer la porción correspondiente del texto original
+      const originalLine = originalText.substr(currentPos, lineLength);
+      originalLines.push(originalLine);
+      // Actualizar la posición actual en el texto original
+      currentPos += lineLength + (originalText.charAt(currentPos + lineLength) === ' ' ? 1 : 0);
+    });
+  } else {
+    // Si no preservamos el caso o usamos mayúsculas, usamos las líneas procesadas
+    originalLines.push(...lines);
+  }
   
   // Calcular el espaciado vertical basado en lineHeight y fontSize
-  const lineSpacing = (object.lineHeight || 1) * object.fontSize
+  const lineSpacing = (object.lineHeight || 1) * object.fontSize;
 
   return (
     <>
       <tspan x={object?.x} dy="0em">
-        {(hasUppercase && firstLine) ? firstLine.toUpperCase(): firstLine}
+        {originalLines[0] || ''}
       </tspan>
 
       {hasMany &&
-        lines.slice(1, lines.length).map((t, index) => (
-          <tspan key={t} x={object?.x} dy={`${lineSpacing}px`}>
-            {(hasUppercase && t) ? t.toUpperCase() : t}
+        originalLines.slice(1).map((line, index) => (
+          <tspan key={`line-${index}`} x={object?.x} dy={`${lineSpacing}px`}>
+            {line || ''}
           </tspan>
         ))}
     </>
-  )
+  );
 }

@@ -127,16 +127,6 @@ export const TextPanel = ({ onChange, object }) => {
             />
           </RowFlex>
         )}
-        {hasProperty('hasUppercase') && (
-          <RowFlex>
-            <NameItem>Uppercase:</NameItem>
-            <Switch
-              label="hasUppercase"
-              defaultChecked={object?.hasUppercase}
-              onChange={(_, checked) => onChange('hasUppercase', checked)}
-            />
-          </RowFlex>
-        )}
         {hasProperty('isExpand') && (
           <RowFlex>
             <NameItem>Expand length:</NameItem>
